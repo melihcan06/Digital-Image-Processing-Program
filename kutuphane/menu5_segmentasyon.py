@@ -520,13 +520,24 @@ def sb_dortlu_komsuluk(goruntu):
     yeni = np.zeros((e, b), dtype=np.int)
     nesne_id = 1
 
-    for i in range(0, e - 1):  # id atama
+    """for i in range(0, e - 1):  # id atama    HATALI!
         for j in range(0, b - 1):
             if grt[i][j] != SB_SIYAH and grt[i][j + 1] != SB_SIYAH and grt[i][j] == grt[i][j + 1]:
                 yeni[i][j]=nesne_id
             else:
                 nesne_id+=1
+        yeni[i][j]=nesne_id"""
+    
+    for i in range(0, e ):  # id atama
+        for j in range(0, b - 1):
+            if grt[i][j] != SB_SIYAH:
+                yeni[i][j] = nesne_id
+                if grt[i][j + 1] != SB_SIYAH and grt[i][j] == grt[i][j + 1]:
+                    yeni[i][j+1] = nesne_id
+            else:
+                nesne_id+=1
         yeni[i][j]=nesne_id
+        nesne_id += 1
 
     yeni = duzenle(yeni)
 
